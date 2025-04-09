@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoloCraft - Explore Our Technology</title>
+    <style>
+        :root {
+            --primary-color: #00f2ff;
+            --background-color: #000000;
+            --text-color: #ffffff;
+            --text-secondary: rgba(215, 215, 215, 0.833);
+            --border-color: rgba(252, 252, 252, 0.314);
+            --hover-color: #8dfcf7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(130deg, rgb(1, 11, 14) 0%, rgb(0, 0, 0) 100%);
+            color: var(--text-color);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Banner Styles */
+        .banner {
+            background-color: var(--primary-color);
+            color: black;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .banner-link {
+            color: black;
+            font-weight: 600;
+            text-decoration: underline;
+            margin-left: 4px;
+            transition: opacity 0.2s;
+        }
+
+        .banner-link:hover {
+            opacity: 0.8;
+        }
+
+        .banner-close {
+            position: absolute;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: black;
+            transition: transform 0.2s;
+        }
+
+        .banner-close:hover {
+            transform: scale(1.1);
+        }
+
+        /* Navigation Styles */
+        nav {
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0, 242, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s, text-shadow 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .dropdown-arrow {
+            width: 8px;
+            height: 8px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            margin-top: -4px;
+            transition: transform 0.2s;
+        }
+
+        .nav-item:hover .dropdown-arrow {
+            transform: rotate(135deg);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            padding: 10px 36px 10px 16px;
+            color: var(--text-color);
+            border-radius: 6px;
+            font-size: 14px;
+            width: 240px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(0, 242, 255, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+
+        .login-btn {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s, transform 0.2s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .login-btn:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .signup-btn {
+            background-color: var(--primary-color);
+            color: black;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 242, 255, 0.2);
+            display: inline-block;
+        }
+
+        .signup-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 242, 255, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 242, 255, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 900px;
+            padding: 0 20px;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #ffffff, var(--primary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero-description {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn {
+            background-color: var(--primary-color);
+            color: black;
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 242, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .primary-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: transform 0.5s;
+            transform: skewX(-15deg);
+        }
+
+        .primary-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 242, 255, 0.4);
+        }
+
+        .primary-btn:hover::before {
+            transform: translateX(200%) skewX(-15deg);
+        }
+
+        .secondary-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-color);
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .secondary-btn:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .products-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        .product-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.4s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 242, 255, 0.15);
+            border-color: rgba(0, 242, 255, 0.2);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .product-content {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--text-color);
+        }
+
+        .product-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .product-features {
+            margin-bottom: 24px;
+        }
+
+        .product-feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .feature-icon {
+            color: var(--primary-color);
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .product-cta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .product-btn {
+            background-color: rgba(0, 242, 255, 0.1);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+        }
+
+        .product-btn:hover {
+            background-color: var(--primary-color);
+            color: black;
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background-color: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-color: rgba(0, 242, 255, 0.2);
+        }
+
+        .feature-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background-color: rgba(0, 242, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover .feature-icon-wrapper {
+            background-color: rgba(0, 242, 255, 0.2);
+            transform: scale(1.1);
+        }
+
+        .feature-icon-large {
+            width: 30px;
+            height: 30px;
+            color: var(--primary-color);
+        }
+
+        .feature-title {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .feature-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Demo Section */
+        .demo-section {
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .demo-video {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 60px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .demo-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-button {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(0, 242, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            background-color: var(--primary-color);
+        }
+
+        .play-icon {
+            width: 30px;
+            height: 30px;
+            color: black;
+            margin-left: 5px;
+        }
+
+        /* Mobile Menu */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 101;
+        }
+
+        .hamburger-menu span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: 0.3s;
+        }
+
+        .hamburger-menu.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 20px;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .mobile-menu.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .mobile-menu-close:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .mobile-menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .mobile-menu-item {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: color 0.2s, padding-left 0.3s;
+        }
+
+        .mobile-menu-item:hover {
+            color: var(--primary-color);
+            padding-left: 8px;
+        }
+
+        .mobile-menu .signup-btn {
+            margin-top: 24px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 80px 0 40px;
+            margin-top: 80px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-bottom: 24px;
+            display: block;
+            transition: text-shadow 0.3s;
+        }
+
+        .footer-logo:hover {
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s, transform 0.2s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+            transform: translateX(3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: black;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 242, 255, 0.3);
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 48px;
+            }
+
+            .hero-description {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .demo-video {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions {
+                display: none;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+
+            .hero {
+                height: 70vh;
+                min-height: 500px;
+            }
+
+            .hero-title {
+                font-size: 40px;
+            }
+
+            .hero-description {
+                font-size: 16px;
+            }
+
+            .primary-btn, .secondary-btn {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .section-description {
+                font-size: 16px;
+            }
+
+            .demo-video {
+                height: 350px;
+            }
+
+            .play-button {
+                width: 60px;
+                height: 60px;
+            }
+
+            .play-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .primary-btn, .secondary-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .section-description {
+                font-size: 15px;
+            }
+
+            .demo-video {
+                height: 250px;
+            }
+
+            .back-to-top {
+                right: 20px;
+                bottom: 20px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <p>Interested in the First Physical AI Necklace? Please go to: <a href="https://osl-agency.github.io/Physics-GPT-test/" class="banner-link">Physics-GPT</a></p>
+        <button class="banner-close" aria-label="Close banner">&times;</button>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">HoloCraft</a>
+            <div class="nav-links">
+                <a href="use-cases.html">
+                    <div class="nav-item"> 
+                        Use cases
+                        <span class="dropdown-arrow"></span>
+                    </div>
+                </a>
+                <a href="explore.html">
+                    <div class="nav-item">
+                        Explore
+                        <span class="dropdown-arrow"></span>
+                    </div>
+                </a>
+                <a href="resources.html">
+                    <div class="nav-item">
+                        Resources
+                        <span class="dropdown-arrow"></span>
+                    </div>
+                </a>
+                <a href="enterprise.html" class="nav-item">Enterprise</a>
+                <a href="pricing.html" class="nav-item">Pricing</a>
+                <a href="investors.html">
+                    <div class="nav-item">
+                        Contact
+                        <span class="dropdown-arrow"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="search" class="search-input" placeholder="Search millions of projects">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <a href="emailsub.html" class="login-btn">Email Newsletter</a>
+                <a href="investors.html" class="signup-btn">Investments</a>
+            </div>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">HoloCraft</a>
+            <button class="mobile-menu-close" aria-label="Close menu">&times;</button>
+        </div>
+        <div class="mobile-menu-items">
+            <a href="use-cases.html" class="mobile-menu-item">
+                Use cases
+                <span class="dropdown-arrow"></span>
+            </a>
+            <a href="explore.html" class="mobile-menu-item">
+                Explore
+                <span class="dropdown-arrow"></span>
+            </a>
+            <a href="resources.html" class="mobile-menu-item">
+                Resources
+                <span class="dropdown-arrow"></span>
+            </a>
+            <a href="enterprise.html" class="mobile-menu-item">Enterprise</a>
+            <a href="pricing.html" class="mobile-menu-item">Pricing</a>
+            <a href="investors.html" class="mobile-menu-item">
+                Contact / Invest
+                <span class="dropdown-arrow"></span>
+            </a>
+            <a href="emailsub.html" class="mobile-menu-item">Email Newsletter</a>
+            <a href="investors.html" class="signup-btn">Investments</a>
+        </div>
+    </div>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">Discover the Future of Holographic Technology</h1>
+                <p class="hero-description">Explore our revolutionary holographic display systems that allow you to visualize and manipulate 3D models with intuitive hand gestures, transforming how you interact with digital content.</p>
+                <div class="hero-cta">
+                    <a href="pricing.html" class="primary-btn">View Products</a>
+                    <a href="#demo" class="secondary-btn">Watch Demo</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">Our Holographic Solutions</h2>
+                <p class="section-description">Discover our range of cutting-edge holographic display systems designed for various applications and environments.</p>
+            </div>
+            <div class="products-container">
+                <div class="product-card">
+                    <img src="/placeholder.svg?height=220&width=400" alt="HoloFan Pro" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">HoloFan Pro</h3>
+                        <p class="product-description">Our flagship holographic fan display with advanced gesture recognition, perfect for professional environments and presentations.</p>
+                        <div class="product-features">
+                            <div class="product-feature">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>4K resolution display</span>
+                            </div>
+                            <div class="product-feature">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Advanced gesture control</span>
+                            </div>
+                            <div class="product-feature">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Multi-user interaction</span>
+                            </div>
+                        </div>
+                        <div class="product-cta">
+                            <span class="product-price">Starting at $1,999</span>
+                            <a href="pricing.html" class="product-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/placeholder.svg?height=220&width=400" alt="HoloFan Studio" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">HoloFan Studio</h3>
+                        <p class="product-description">A mid-range holographic display designed for creative professionals, educators, and small businesses.</p>
+                        <div class="product-features">
+                            <div class="product-feature">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>2K resolution display</span>
+                            </div>
+                            <div class="product-feature">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Basic gesture recognition</span>
+                            </div>
+                            <div class="product-feature">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Compact design</span>
+                            </div>
+                        </div>
+                        <div class="product-cta">
+                            <span class="product-price">Starting at $999</span>
+                            <a href="pricing.html" class="product-btn">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="/placeholder.svg?height=220&width=400" alt="HoloFan Enterprise" class="product-image">
+                    <div class="product-content">
+                        <h3 class="product-title">HoloFan Enterprise</h3>
+                        <p class="product-description">Our most powerful holographic system designed for large-scale installations and enterprise applications.</p>
+                        <div class="product-features">
+                            <div class="product-feature">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>8K resolution display</span>
+                            </div>
+                            <div class="product-feature">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Advanced AI-powered interaction</span>
+                            </div>
+                            <div class="product-feature">
+                                <svg class="feature-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>Multi-display synchronization</span>
+                            </div>
+                        </div>
+                        <div class="product-cta">
+                            <span class="product-price">Custom Pricing</span>
+                            <a href="enterprise.html" class="product-btn">Contact Sales</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="features-container">
+                <div class="section-header">
+                    <h2 class="section-title">Key Features</h2>
+                    <p class="section-description">Discover what makes HoloCraft's holographic technology stand out from traditional displays.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <svg class="feature-icon-large" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">High-Speed Rendering</h3>
+                        <p class="feature-description">Our proprietary rendering technology creates smooth, high-definition holographic images with minimal latency, ensuring a seamless user experience.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <svg class="feature-icon-large" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Intuitive Gesture Control</h3>
+                        <p class="feature-description">Manipulate 3D models with natural hand movements. Our advanced sensors detect precise gestures for rotating, scaling, and interacting with holographic content.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <svg class="feature-icon-large" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Multi-Platform Compatibility</h3>
+                        <p class="feature-description">Seamlessly integrate with popular 3D modeling software, CAD programs, and visualization tools. Import models directly from your preferred platform.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <svg class="feature-icon-large" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Collaborative Viewing</h3>
+                        <p class="feature-description">Multiple users can view and interact with the same holographic content simultaneously, making it perfect for team collaboration and presentations.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <svg class="feature-icon-large" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Real-Time Analytics</h3>
+                        <p class="feature-description">Track user interactions and engagement with your holographic content through our comprehensive analytics dashboard.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon-wrapper">
+                            <svg class="feature-icon-large" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Enterprise-Grade Security</h3>
+                        <p class="feature-description">Protect your intellectual property with end-to-end encryption and secure access controls for all holographic content.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="demo" class="demo-section">
+            <div class="demo-bg"></div>
+            <div class="demo-container">
+                <div class="section-header">
+                    <h2 class="section-title">See HoloCraft in Action</h2>
+                    <p class="section-description">Watch our holographic display technology bring 3D models to life with intuitive gesture control.</p>
+                </div>
+                <div class="demo-video">
+                    <img src="/placeholder.svg?height=450&width=800" alt="HoloCraft Demo" class="demo-placeholder">
+                    <div class="play-button">
+                        <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html" class="footer-logo">HoloCraft</a>
+                <div class="social-links">
+                    <a href="#" class="social-link">Join our Vision</a>
+                    <a href="#" class="social-link">Youtube</a>
+                    <a href="https://x.com/holocraft_tech?t=m1yWQ_zzRs8wlNMUPSeuKw&s=09" class="social-link">X</a>
+                    <a href="https://www.instagram.com/holocraft.tech?igsh=aGthMWUwbzhnYTNl" class="social-link">Instagram</a>
+                    <a href="mailto:holocraft.tecn@gmail.com" class="social-link">Email</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Product</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Featured Projects</a>
+                    <a href="#" class="footer-link">Documentation</a>
+                    <a href="#" class="footer-link">Organizations</a>
+                    <a href="pricing.html" class="footer-link">Pricing</a>
+                    <a href="#" class="footer-link">Feedback</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>News</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">New True-Mixed-Reality</a>
+                    <a href="#" class="footer-link">AR vs HoloCraft</a>
+                    <a href="overview.html" class="footer-link">The HoloCraft Method</a>
+                    <a href="overview.html" class="footer-link">Innovation</a>
+                    <a href="#" class="footer-link">Introductions</a>
+                    <a href="#" class="footer-link">Instructables</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Sitemap</h3>
+                <div class="footer-links">
+                    <a href="overview.html" class="footer-link">Overview</a>
+                    <a href="#" class="footer-link">Hologram Displaying</a>
+                    <a href="#" class="footer-link">Reference Design</a>
+                    <a href="#" class="footer-link">Common modeling CADs</a>
+                    <a href="overview.html" class="footer-link">Project Inventions</a>
+                    <a href="#" class="footer-link">Manufacture</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Upcoming</a>
+                    <a href="mailto:holocraft.tecn@gmail.com" class="footer-link">Contact Us</a>
+                    <a href="mailto:holocraft.tecn@gmail.com" class="footer-link">Contact (Investments)</a>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">We're Hiring!</a>
+                    <a href="#" class="footer-link">Status</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 HoloCraft Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Banner close functionality
+            const bannerCloseBtn = document.querySelector('.banner-close');
+            const banner = document.querySelector('.banner');
+
+            if (bannerCloseBtn && banner) {
+                bannerCloseBtn.addEventListener('click', function() {
+                    banner.style.display = 'none';
+                });
+            }
+
+            // Mobile menu functionality
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuClose = document.querySelector('.mobile-menu-close');
+
+            if (hamburgerMenu && mobileMenu && mobileMenuClose) {
+                hamburgerMenu.addEventListener('click', function() {
+                    mobileMenu.classList.add('active');
+                    hamburgerMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+
+                mobileMenuClose.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    hamburgerMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Dropdown functionality
+            const dropdowns = document.querySelectorAll('.nav-item');
+            dropdowns.forEach(dropdown => {
+                if (dropdown.querySelector('.dropdown-arrow')) {
+                    dropdown.addEventListener('click', function(e) {
+                        // Only prevent default if it's a direct click on the dropdown, not its children
+                        if (e.target === this || e.target.classList.contains('dropdown-arrow')) {
+                            e.preventDefault();
+                        }
+                        console.log('Dropdown clicked:', this.textContent.trim());
+                    });
+                }
+            });
+
+            // Scroll to top functionality
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            if (backToTopButton) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTopButton.classList.add('visible');
+                    } else {
+                        backToTopButton.classList.remove('visible');
+                    }
+                });
+
+                backToTopButton.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Play button functionality
+            const playButton = document.querySelector('.play-button');
+            if (playButton) {
+                playButton.addEventListener('click', function() {
+                    alert('Video demo would play here in a production environment.');
+                });
+            }
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('nav');
+            if (navbar) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 50) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

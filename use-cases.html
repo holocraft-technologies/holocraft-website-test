@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HoloCraft - Use Cases</title>
+    <style>
+        :root {
+            --primary-color: #00f2ff;
+            --background-color: #000000;
+            --text-color: #ffffff;
+            --text-secondary: rgba(215, 215, 215, 0.833);
+            --border-color: rgba(252, 252, 252, 0.314);
+            --hover-color: #8dfcf7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(130deg, rgb(1, 11, 14) 0%, rgb(0, 0, 0) 100%);
+            color: var(--text-color);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Banner Styles */
+        .banner {
+            background-color: var(--primary-color);
+            color: black;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .banner-link {
+            color: black;
+            font-weight: 600;
+            text-decoration: underline;
+            margin-left: 4px;
+            transition: opacity 0.2s;
+        }
+
+        .banner-link:hover {
+            opacity: 0.8;
+        }
+
+        .banner-close {
+            position: absolute;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: black;
+            transition: transform 0.2s;
+        }
+
+        .banner-close:hover {
+            transform: scale(1.1);
+        }
+
+        /* Navigation Styles */
+        nav {
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 12px 0;
+            box-shadow: 0 2px 10px rgba(0, 242, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: transform 0.3s, text-shadow 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        .dropdown-arrow {
+            width: 8px;
+            height: 8px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            margin-top: -4px;
+            transition: transform 0.2s;
+        }
+
+        .nav-item:hover .dropdown-arrow {
+            transform: rotate(135deg);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-input {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: none;
+            padding: 10px 36px 10px 16px;
+            color: var(--text-color);
+            border-radius: 6px;
+            font-size: 14px;
+            width: 240px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(0, 242, 255, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            pointer-events: none;
+        }
+
+        .login-btn {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s, transform 0.2s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .login-btn:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .signup-btn {
+            background-color: var(--primary-color);
+            color: black;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 242, 255, 0.2);
+            display: inline-block;
+        }
+
+        .signup-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 242, 255, 0.3);
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 100px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .page-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            background: linear-gradient(to right, #ffffff, var(--primary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Use Cases Section */
+        .use-cases-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 80px;
+        }
+
+        .use-case {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .use-case.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .use-case:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .use-case-content {
+            flex: 1;
+            padding: 0 40px;
+        }
+
+        .use-case-image {
+            flex: 1;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s, box-shadow 0.5s;
+            position: relative;
+        }
+
+        .use-case-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .use-case-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0, 242, 255, 0.1), transparent);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .use-case-image:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 242, 255, 0.2);
+        }
+
+        .use-case-image:hover::before {
+            opacity: 1;
+        }
+
+        .use-case-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .use-case h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .use-case p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .use-case-features {
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .feature-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .cta-btn {
+            background-color: var(--primary-color);
+            color: black;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 242, 255, 0.2);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: transform 0.5s;
+            transform: skewX(-15deg);
+        }
+
+        .cta-btn:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 242, 255, 0.3);
+        }
+
+        .cta-btn:hover::before {
+            transform: translateX(200%) skewX(-15deg);
+        }
+
+        .cta-btn::after {
+            content: "→";
+            transition: transform 0.3s;
+        }
+
+        .cta-btn:hover::after {
+            transform: translateX(4px);
+        }
+
+        /* Mobile Menu */
+        .hamburger-menu {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 101;
+        }
+
+        .hamburger-menu span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background-color: var(--text-color);
+            transition: 0.3s;
+        }
+
+        .hamburger-menu.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 20px;
+            z-index: 1000;
+            overflow-y: auto;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .mobile-menu.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .mobile-menu-close {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .mobile-menu-close:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .mobile-menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .mobile-menu-item {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: color 0.2s, padding-left 0.3s;
+        }
+
+        .mobile-menu-item:hover {
+            color: var(--primary-color);
+            padding-left: 8px;
+        }
+
+        .mobile-menu .signup-btn {
+            margin-top: 24px;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 80px 0 40px;
+            margin-top: 80px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-logo {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-bottom: 24px;
+            display: block;
+            transition: text-shadow 0.3s;
+        }
+
+        .footer-logo:hover {
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s, transform 0.2s;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .social-link:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-column h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+            transform: translateX(3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: black;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 242, 255, 0.3);
+            z-index: 99;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--hover-color);
+            transform: translateY(-5px);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .page-header h1 {
+                font-size: 40px;
+            }
+
+            .use-case-content {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions {
+                display: none;
+            }
+
+            .hamburger-menu {
+                display: flex;
+            }
+
+            .page-header {
+                padding: 80px 20px 40px;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .page-header p {
+                font-size: 16px;
+            }
+
+            .use-case, .use-case:nth-child(even) {
+                flex-direction: column;
+                margin-bottom: 60px;
+            }
+
+            .use-case-content {
+                order: 2;
+                padding: 30px 0 0;
+            }
+
+            .use-case-image {
+                order: 1;
+                margin-bottom: 20px;
+            }
+
+            .use-case h2 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 28px;
+            }
+
+            .page-header p {
+                font-size: 15px;
+            }
+
+            .use-case h2 {
+                font-size: 24px;
+            }
+
+            .use-case p, .feature-text {
+                font-size: 15px;
+            }
+
+            .cta-btn {
+                padding: 10px 20px;
+                font-size: 15px;
+            }
+
+            .back-to-top {
+                right: 20px;
+                bottom: 20px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <p>Interested in the First Physical AI Necklace? Please go to: <a href="https://osl-agency.github.io/Physics-GPT-test/" class="banner-link">Physics-GPT</a></p>
+        <button class="banner-close" aria-label="Close banner">&times;</button>
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">HoloCraft</a>
+            <div class="nav-links">
+                <a href="use-cases.html">
+                    <div class="nav-item"> 
+                        Use cases
+                        <span class="dropdown-arrow"></span>
+                    </div>
+                </a>
+                <a href="explore.html">
+                    <div class="nav-item">
+                        Explore
+                        <span class="dropdown-arrow"></span>
+                    </div>
+                </a>
+                <a href="resources.html">
+                    <div class="nav-item">
+                        Resources
+                        <span class="dropdown-arrow"></span>
+                    </div>
+                </a>
+                <a href="enterprise.html" class="nav-item">Enterprise</a>
+                <a href="pricing.html" class="nav-item">Pricing</a>
+                <a href="investors.html">
+                    <div class="nav-item">
+                        Contact
+                        <span class="dropdown-arrow"></span>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-actions">
+                <div class="search-container">
+                    <input type="search" class="search-input" placeholder="Search millions of projects">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </div>
+                <a href="emailsub.html" class="login-btn">Email Newsletter</a>
+                <a href="investors.html" class="signup-btn">Investments</a>
+            </div>
+            <div class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo">HoloCraft</a>
+            <button class="mobile-menu-close" aria-label="Close menu">&times;</button>
+        </div>
+        <div class="mobile-menu-items">
+            <a href="use-cases.html" class="mobile-menu-item">
+                Use cases
+                <span class="dropdown-arrow"></span>
+            </a>
+            <a href="explore.html" class="mobile-menu-item">
+                Explore
+                <span class="dropdown-arrow"></span>
+            </a>
+            <a href="resources.html" class="mobile-menu-item">
+                Resources
+                <span class="dropdown-arrow"></span>
+            </a>
+            <a href="enterprise.html" class="mobile-menu-item">Enterprise</a>
+            <a href="pricing.html" class="mobile-menu-item">Pricing</a>
+            <a href="investors.html" class="mobile-menu-item">
+                Contact / Invest
+                <span class="dropdown-arrow"></span>
+            </a>
+            <a href="emailsub.html" class="mobile-menu-item">Email Newsletter</a>
+            <a href="investors.html" class="signup-btn">Investments</a>
+        </div>
+    </div>
+
+    <main>
+        <div class="page-header">
+            <h1>Transforming Industries with Holographic Technology</h1>
+            <p>Discover how HoloCraft's interactive holographic solutions are revolutionizing workflows, enhancing creativity, and enabling new possibilities across various industries.</p>
+        </div>
+
+        <div class="use-cases-container">
+            <div class="use-case">
+                <div class="use-case-content">
+                    <h2>Engineering & Design</h2>
+                    <p>Transform your engineering and design processes with HoloCraft's interactive holographic technology. Visualize complex 3D models in real space and manipulate them through intuitive hand gestures, enabling faster iterations and better collaboration.</p>
+                    <div class="use-case-features">
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Manipulate 3D CAD models with natural hand gestures</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Visualize designs at actual scale in physical space</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Collaborate in real-time with team members on holographic models</span>
+                        </div>
+                    </div>
+                    <a href="explore.html" class="cta-btn">Explore Engineering Solutions</a>
+                </div>
+                <div class="use-case-image">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Engineering and Design with HoloCraft">
+                </div>
+            </div>
+
+            <div class="use-case">
+                <div class="use-case-content">
+                    <h2>Architecture & Construction</h2>
+                    <p>Bring architectural designs to life with interactive holographic models. Walk through virtual buildings, make real-time adjustments, and communicate design intent more effectively with clients and stakeholders.</p>
+                    <div class="use-case-features">
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Transform BIM models into interactive holograms</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Conduct virtual walkthroughs of building designs</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Identify design issues before construction begins</span>
+                        </div>
+                    </div>
+                    <a href="explore.html" class="cta-btn">Explore Architectural Solutions</a>
+                </div>
+                <div class="use-case-image">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Architecture and Construction with HoloCraft">
+                </div>
+            </div>
+
+            <div class="use-case">
+                <div class="use-case-content">
+                    <h2>Healthcare & Medical Training</h2>
+                    <p>Revolutionize medical education and patient care with interactive holographic visualizations. Examine detailed anatomical models, practice surgical procedures, and enhance patient understanding through 3D holographic representations.</p>
+                    <div class="use-case-features">
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Visualize complex anatomical structures in 3D space</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Practice surgical procedures on holographic models</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Improve patient understanding with interactive visualizations</span>
+                        </div>
+                    </div>
+                    <a href="explore.html" class="cta-btn">Explore Healthcare Solutions</a>
+                </div>
+                <div class="use-case-image">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Healthcare and Medical Training with HoloCraft">
+                </div>
+            </div>
+
+            <div class="use-case">
+                <div class="use-case-content">
+                    <h2>Education & Research</h2>
+                    <p>Transform learning experiences with interactive holographic content. Make abstract concepts tangible, enhance student engagement, and enable hands-on exploration of complex subjects through gesture-controlled 3D models.</p>
+                    <div class="use-case-features">
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Create interactive 3D learning materials</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Visualize scientific concepts in three dimensions</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="feature-text">Enable hands-on learning through gesture control</span>
+                        </div>
+                    </div>
+                    <a href="explore.html" class="cta-btn">Explore Educational Solutions</a>
+                </div>
+                <div class="use-case-image">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Education and Research with HoloCraft">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <a href="index.html" class="footer-logo">HoloCraft</a>
+                <div class="social-links">
+                    <a href="#" class="social-link">Join our Vision</a>
+                    <a href="#" class="social-link">Youtube</a>
+                    <a href="https://x.com/holocraft_tech?t=m1yWQ_zzRs8wlNMUPSeuKw&s=09" class="social-link">X</a>
+                    <a href="https://www.instagram.com/holocraft.tech?igsh=aGthMWUwbzhnYTNl" class="social-link">Instagram</a>
+                    <a href="mailto:holocraft.tecn@gmail.com" class="social-link">Email</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Product</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Featured Projects</a>
+                    <a href="#" class="footer-link">Documentation</a>
+                    <a href="#" class="footer-link">Organizations</a>
+                    <a href="pricing.html" class="footer-link">Pricing</a>
+                    <a href="#" class="footer-link">Feedback</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>News</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">New True-Mixed-Reality</a>
+                    <a href="#" class="footer-link">AR vs HoloCraft</a>
+                    <a href="overview.html" class="footer-link">The HoloCraft Method</a>
+                    <a href="overview.html" class="footer-link">Innovation</a>
+                    <a href="#" class="footer-link">Introductions</a>
+                    <a href="#" class="footer-link">Instructables</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Sitemap</h3>
+                <div class="footer-links">
+                    <a href="overview.html" class="footer-link">Overview</a>
+                    <a href="#" class="footer-link">Hologram Displaying</a>
+                    <a href="#" class="footer-link">Reference Design</a>
+                    <a href="#" class="footer-link">Common modeling CADs</a>
+                    <a href="overview.html" class="footer-link">Project Inventions</a>
+                    <a href="#" class="footer-link">Manufacture</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Upcoming</a>
+                    <a href="mailto:holocraft.tecn@gmail.com" class="footer-link">Contact Us</a>
+                    <a href="mailto:holocraft.tecn@gmail.com" class="footer-link">Contact (Investments)</a>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">We're Hiring!</a>
+                    <a href="#" class="footer-link">Status</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 HoloCraft Technologies. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <div class="back-to-top" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Banner close functionality
+            const bannerCloseBtn = document.querySelector('.banner-close');
+            const banner = document.querySelector('.banner');
+
+            if (bannerCloseBtn && banner) {
+                bannerCloseBtn.addEventListener('click', function() {
+                    banner.style.display = 'none';
+                });
+            }
+
+            // Mobile menu functionality
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuClose = document.querySelector('.mobile-menu-close');
+
+            if (hamburgerMenu && mobileMenu && mobileMenuClose) {
+                hamburgerMenu.addEventListener('click', function() {
+                    mobileMenu.classList.add('active');
+                    hamburgerMenu.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+
+                mobileMenuClose.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    hamburgerMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Dropdown functionality
+            const dropdowns = document.querySelectorAll('.nav-item');
+            dropdowns.forEach(dropdown => {
+                if (dropdown.querySelector('.dropdown-arrow')) {
+                    dropdown.addEventListener('click', function(e) {
+                        // Only prevent default if it's a direct click on the dropdown, not its children
+                        if (e.target === this || e.target.classList.contains('dropdown-arrow')) {
+                            e.preventDefault();
+                        }
+                        console.log('Dropdown clicked:', this.textContent.trim());
+                    });
+                }
+            });
+
+            // Scroll to top functionality
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            if (backToTopButton) {
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTopButton.classList.add('visible');
+                    } else {
+                        backToTopButton.classList.remove('visible');
+                    }
+                });
+
+                backToTopButton.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Animation on scroll
+            const animateOnScroll = function() {
+                const useCases = document.querySelectorAll('.use-case');
+                useCases.forEach((useCase, index) => {
+                    const useCasePosition = useCase.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    if (useCasePosition < windowHeight - 100) {
+                        setTimeout(() => {
+                            useCase.classList.add('animated');
+                        }, index * 200);
+                    }
+                });
+            };
+
+            window.addEventListener('scroll', animateOnScroll);
+            // Initial check for elements in view
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>
