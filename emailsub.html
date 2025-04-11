@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HoloCraft - Investor Contact</title>
+    <title>HoloCraft - Newsletter Subscription</title>
     <style>
         :root {
             --primary-color: #00f2ff;
@@ -234,8 +234,8 @@
             box-shadow: 0 6px 16px rgba(0, 242, 255, 0.3);
         }
 
-        /* Contact Form Styles */
-        .contact-form-container {
+        /* Newsletter Form Styles */
+        .newsletter-form-container {
             max-width: 600px;
             margin: 100px auto;
             padding: 40px;
@@ -251,9 +251,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .contact-form-container h2 {
+        .newsletter-form-container h2 {
             font-size: 32px;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
             text-align: center;
             background: linear-gradient(to right, #ffffff, var(--primary-color));
             -webkit-background-clip: text;
@@ -261,7 +261,15 @@
             color: transparent;
         }
 
-        .contact-form {
+        .newsletter-form-container p {
+            text-align: center;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
             display: grid;
             gap: 24px;
         }
@@ -283,8 +291,7 @@
             color: var(--primary-color);
         }
 
-        .form-group input,
-        .form-group textarea {
+        .form-group input {
             padding: 14px;
             background-color: rgba(255, 255, 255, 0.07);
             border: 1px solid var(--border-color);
@@ -294,17 +301,11 @@
             transition: all 0.3s;
         }
 
-        .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group input:focus {
             outline: none;
             border-color: var(--primary-color);
             background-color: rgba(255, 255, 255, 0.1);
             box-shadow: 0 0 0 3px rgba(0, 242, 255, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 150px;
         }
 
         .submit-btn {
@@ -323,6 +324,7 @@
             display: inline-block;
             text-align: center;
             width: 100%;
+            text-decoration: none;
         }
 
         .submit-btn::before {
@@ -345,6 +347,51 @@
 
         .submit-btn:hover::before {
             transform: translateX(200%) skewX(-15deg);
+        }
+
+        /* Checkbox styles */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.07);
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .checkbox-group input[type="checkbox"]:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .checkbox-group input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid black;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox-group label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            cursor: pointer;
         }
 
         /* Mobile Menu */
@@ -451,6 +498,27 @@
             text-align: center;
         }
 
+        /* Success message */
+        .success-message {
+            display: none;
+            background-color: rgba(0, 242, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .success-message.visible {
+            display: block;
+        }
+
+        .success-message h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
         /* Responsive Styles */
         @media (max-width: 768px) {
             .nav-links, .nav-actions {
@@ -461,7 +529,7 @@
                 display: flex;
             }
 
-            .contact-form-container {
+            .newsletter-form-container {
                 margin: 60px auto;
                 padding: 30px 20px;
                 width: 90%;
@@ -469,16 +537,19 @@
         }
 
         @media (max-width: 480px) {
-            .contact-form-container {
+            .newsletter-form-container {
                 padding: 25px 15px;
             }
 
-            .contact-form-container h2 {
+            .newsletter-form-container h2 {
                 font-size: 28px;
             }
 
-            .form-group input,
-            .form-group textarea {
+            .newsletter-form-container p {
+                font-size: 15px;
+            }
+
+            .form-group input {
                 padding: 12px;
                 font-size: 15px;
             }
@@ -519,8 +590,8 @@
                     </div>
                 </a>
                 <a href="404.html" class="nav-item">Enterprise</a>
-                <a href="pricing.html" class="nav-item">Pricing</a>
-                <a href="index.html">
+                <a href="404.html" class="nav-item">Pricing</a>
+                <a href="investors.html">
                     <div class="nav-item">
                         Contact
                         <span class="dropdown-arrow"></span>
@@ -536,7 +607,7 @@
                     </svg>
                 </div>
                 <a href="index.html" class="login-btn">Home</a>
-                <a href="emailsub.html" class="signup-btn">Email Newsletter</a>
+                <a href="investors.html" class="signup-btn">Investment</a>
             </div>
             <div class="hamburger-menu">
                 <span></span>
@@ -552,10 +623,6 @@
             <button class="mobile-menu-close" aria-label="Close menu">&times;</button>
         </div>
         <div class="mobile-menu-items">
-            <a href="index.html" class="mobile-menu-item">
-                Home
-                <span class="dropdown-arrow"></span>
-            </a>
             <a href="404.html" class="mobile-menu-item">
                 Use cases
                 <span class="dropdown-arrow"></span>
@@ -570,43 +637,52 @@
             </a>
             <a href="404.html" class="mobile-menu-item">Enterprise</a>
             <a href="404.html" class="mobile-menu-item">Pricing</a>
-            <a href="mailto:holocraft.tecn@gmail.com" class="mobile-menu-item">
+            <a href="index.html" class="mobile-menu-item">
                 Contact
                 <span class="dropdown-arrow"></span>
             </a>
             <a href="index.html" class="login-btn">Home</a>
-            <a href="emailsub.html" class="signup-btn">Email Newsletter</a>
+            <a href="investors.html" class="signup-btn">Investments</a>
         </div>
     </div>
 
     <main>
-        <div class="contact-form-container">
-            <h2>Investor Contact</h2>
-            <form class="contact-form">
+        <div class="newsletter-form-container">
+            <h2>Stay Involved and Up-to-Date</h2>
+            <p>Subscribe to our newsletter for the latest updates on HoloCraft technologies, innovations, and exclusive early access to new product releases.</p>
+            <form class="newsletter-form" id="newsletter-form">
                 <div class="form-group">
                     <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
                 </div>
                 <div class="form-group">
                     <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email address">
                 </div>
                 <div class="form-group">
-                    <label for="company">Company Name</label>
-                    <input type="text" id="company" name="company">
+                    <label for="interests">Areas of Interest</label>
+                    <input type="text" id="interests" name="interests" placeholder="e.g., AR, VR, Holographic Displays, 3D Modeling">
                 </div>
-                <div class="form-group">
-                    <label for="investment">Investment Amount Area</label>
-                    <input type="number" id="investment" name="investment" min="0" step="1000" placeholder="Enter amount in USD">
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="updates" name="updates" checked>
+                    <label for="updates">Receive product updates and announcements</label>
                 </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" required placeholder="Tell us about your interest in HoloCraft Technologies"></textarea>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="events" name="events">
+                    <label for="events">Receive information about upcoming events and webinars</label>
                 </div>
-                <a href="mailto:holocraft.tecn@gmail.com?subject=Investment%20Request" class="submit-btn">
-                    <strong>Submit Request</strong>
+               
+                <a href="mailto:holocraft.tecn@gmail.com?subject=Newsletter%20Subscription&body=Dear%20HoloCraft%20Technologies%20Team,%0A%0AI%20would%20like%20to%20subscribe%20to%20your%20newsletter.%0A%0ABest%20regards" class="submit-btn">
+                    <strong>Subscribe</strong>
                 </a>
             </form>
+            
+            <div class="success-message" id="success-message">
+                <h3>Thank You for Subscribing!</h3>
+                <p>You've successfully subscribed to the HoloCraft newsletter. We'll keep you updated with the latest news and innovations.</p>
+            </div>
         </div>
     </main>
 
@@ -655,39 +731,17 @@
                 }
             });
 
-            // Form validation and enhancement
-            const contactForm = document.querySelector('.contact-form');
-            const formInputs = document.querySelectorAll('.form-group input, .form-group textarea');
+            // Form submission
+            const newsletterForm = document.querySelector('.newsletter-form');
+            const successMessage = document.getElementById('success-message');
             
-            formInputs.forEach(input => {
-                // Add focus animation
-                input.addEventListener('focus', function() {
-                    this.parentElement.classList.add('focused');
-                });
-                
-                input.addEventListener('blur', function() {
-                    this.parentElement.classList.remove('focused');
-                });
-                
-                // Simple validation
-                input.addEventListener('input', function() {
-                    if (this.value.trim() !== '') {
-                        this.classList.add('valid');
-                        this.classList.remove('invalid');
-                    } else if (this.hasAttribute('required')) {
-                        this.classList.add('invalid');
-                        this.classList.remove('valid');
-                    }
-                });
-            });
-            
-            if (contactForm) {
-                contactForm.addEventListener('submit', function(e) {
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
                     // Basic form validation
                     let isValid = true;
-                    const requiredInputs = contactForm.querySelectorAll('[required]');
+                    const requiredInputs = newsletterForm.querySelectorAll('[required]');
                     
                     requiredInputs.forEach(input => {
                         if (input.value.trim() === '') {
@@ -697,10 +751,18 @@
                     });
                     
                     if (isValid) {
-                        // Normally would submit the form here
-                        // For this demo, we'll just redirect to the mailto link
-                        const emailLink = document.querySelector('.submit-btn').getAttribute('href');
-                        window.location.href = emailLink;
+                        // Show success message
+                        if (successMessage) {
+                            successMessage.classList.add('visible');
+                            newsletterForm.style.display = 'none';
+                        }
+                        
+                        // In a real implementation, you would send the form data to a server
+                        // For this demo, we'll just redirect to the mailto link after a delay
+                        setTimeout(() => {
+                            const emailLink = document.querySelector('.submit-btn').getAttribute('href');
+                            window.location.href = emailLink;
+                        }, 2000);
                     }
                 });
             }
@@ -716,8 +778,20 @@
                     }
                 });
             }
+            
+            // Form input animation
+            const formInputs = document.querySelectorAll('.form-group input');
+            
+            formInputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('focused');
+                });
+            });
         });
     </script>
 </body>
 </html>
-
