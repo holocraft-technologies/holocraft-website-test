@@ -543,6 +543,44 @@
             transform: translateY(-5px);
         }
 
+        .mobile-menu {
+    display: flex;  /* Ändern von 'none' zu 'flex' */
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 40px 20px;
+    z-index: 1000;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);  /* von 0.6s auf 0.8s erhöht */
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.mobile-menu-items {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;  /* von 0.5s auf 0.6s erhöht */
+    transition-delay: 0.4s;  /* von 0.3s auf 0.4s erhöht */
+}
+
+.mobile-menu.active .mobile-menu-items {
+    opacity: 1;
+    transform: translateY(0);
+}
+
         /* Responsive Styles */
         @media (max-width: 768px) {
             .nav-links, .nav-actions {
@@ -658,21 +696,25 @@
             <button class="mobile-menu-close" aria-label="Close menu">&times;</button>
         </div>
         <div class="mobile-menu-items">
-            <a href="404.html" class="mobile-menu-item">
+            <a href="index.html" class="mobile-menu-item">
+                Home
+                <span class="dropdown-arrow"></span>
+            </a>
+            <a href="use-cases.html" class="mobile-menu-item">
                 Use cases
                 <span class="dropdown-arrow"></span>
             </a>
-            <a href="404.html" class="mobile-menu-item">
+            <a href="explore.html" class="mobile-menu-item">
                 Explore
                 <span class="dropdown-arrow"></span>
             </a>
-            <a href="404.html" class="mobile-menu-item">
+            <a href="resources.html" class="mobile-menu-item">
                 Resources
                 <span class="dropdown-arrow"></span>
             </a>
-            <a href="404.html" class="mobile-menu-item">Enterprise</a>
+            <a href="enterprise.html" class="mobile-menu-item">Enterprise</a>
             <a href="pricing.html" class="mobile-menu-item">Pricing</a>
-            <a href="investors.html" class="mobile-menu-item">
+            <a href="mailto:holocraft.tecn@gmail.com" class="mobile-menu-item">
                 Contact
                 <span class="dropdown-arrow"></span>
             </a>

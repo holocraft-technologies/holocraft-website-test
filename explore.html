@@ -834,6 +834,44 @@
             transform: translateY(-5px);
         }
 
+        .mobile-menu {
+    display: flex;  /* Ändern von 'none' zu 'flex' */
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 40px 20px;
+    z-index: 1000;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);  /* von 0.6s auf 0.8s erhöht */
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.mobile-menu-items {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;  /* von 0.5s auf 0.6s erhöht */
+    transition-delay: 0.4s;  /* von 0.3s auf 0.4s erhöht */
+}
+
+.mobile-menu.active .mobile-menu-items {
+    opacity: 1;
+    transform: translateY(0);
+}
+
         /* Responsive Styles */
         @media (max-width: 1024px) {
             .hero-title {
@@ -1048,7 +1086,7 @@
             </div>
             <div class="products-container">
                 <div class="product-card">
-                    <img src="/placeholder.svg?height=220&width=400" alt="HoloFan Pro" class="product-image">
+                    <img src="image (3).jpg" alt="HoloFan Pro" class="product-image">
                     <div class="product-content">
                         <h3 class="product-title">HoloFan Pro</h3>
                         <p class="product-description">Our flagship holographic fan display with advanced gesture recognition, perfect for professional environments and presentations.</p>
@@ -1079,7 +1117,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <img src="/placeholder.svg?height=220&width=400" alt="HoloFan Studio" class="product-image">
+                    <img src="image (2).jpg" alt="HoloFan Studio" class="product-image">
                     <div class="product-content">
                         <h3 class="product-title">HoloFan Studio</h3>
                         <p class="product-description">A mid-range holographic display designed for creative professionals, educators, and small businesses.</p>
@@ -1110,7 +1148,7 @@
                     </div>
                 </div>
                 <div class="product-card">
-                    <img src="/placeholder.svg?height=220&width=400" alt="HoloFan Enterprise" class="product-image">
+                    <img src="image.jpg" alt="HoloFan Enterprise" class="product-image">
                     <div class="product-content">
                         <h3 class="product-title">HoloFan Enterprise</h3>
                         <p class="product-description">Our most powerful holographic system designed for large-scale installations and enterprise applications.</p>
@@ -1221,7 +1259,7 @@
                     <p class="section-description">Watch our holographic display technology bring 3D models to life with intuitive gesture control.</p>
                 </div>
                 <div class="demo-video">
-                    <img src="/placeholder.svg?height=450&width=800" alt="HoloCraft Demo" class="demo-placeholder">
+                    <img src="" alt="HoloCraft Demo" class="demo-placeholder">
                     <div class="play-button">
                         <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polygon points="5 3 19 12 5 21 5 3"></polygon>

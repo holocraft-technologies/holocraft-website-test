@@ -509,7 +509,8 @@
         }
 
         .mobile-menu {
-            display: none;
+            display: flex;
+            flex-direction: column;
             position: fixed;
             top: 0;
             left: 0;
@@ -518,68 +519,103 @@
             background-color: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            padding: 20px;
+            padding: 40px 20px;
             z-index: 1000;
             overflow-y: auto;
-            transition: opacity 0.3s, transform 0.3s;
             opacity: 0;
-            transform: translateY(-20px);
-        }
-
-        .mobile-menu.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
+            visibility: hidden;
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .mobile-menu-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .mobile-menu-close {
             background: none;
             border: none;
             color: var(--text-color);
-            font-size: 24px;
+            font-size: 32px;
             cursor: pointer;
-            transition: color 0.2s, transform 0.2s;
+            padding: 8px;
+            transition: transform 0.3s;
         }
 
         .mobile-menu-close:hover {
-            color: var(--primary-color);
             transform: rotate(90deg);
+            color: var(--primary-color);
         }
 
         .mobile-menu-items {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 24px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+            transition-delay: 0.3s;
         }
 
         .mobile-menu-item {
             color: var(--text-color);
             text-decoration: none;
             font-size: 18px;
+            padding: 12px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-            transition: color 0.2s, padding-left 0.3s;
+            transition: color 0.3s, transform 0.3s;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .mobile-menu-item:hover {
             color: var(--primary-color);
-            padding-left: 8px;
+            transform: translateX(10px);
+        }
+
+        .mobile-menu-item .dropdown-arrow {
+            width: 10px;
+            height: 10px;
+            border-left: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(-45deg);
+            transition: transform 0.3s;
+        }
+
+        .mobile-menu-item:hover .dropdown-arrow {
+            transform: rotate(-135deg);
         }
 
         .mobile-menu .signup-btn {
-            margin-top: 24px;
+            margin-top: 32px;
             width: 100%;
             text-align: center;
+            padding: 16px;
+            font-size: 16px;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-items {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            transition-delay: 0.2s;
+        }
+
+        .mobile-menu.active .mobile-menu-items {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Back to top button */
@@ -782,8 +818,8 @@
                         <span class="dropdown-arrow"></span>
                     </div>
                 </a>
-                <a href="enterprice.html" class="nav-item">Enterprise</a>
-                <a href="pricing.html" class="nav-item">Pricing</a>
+                <a href="404.html" class="nav-item">Enterprise</a>
+                <a href="404.html" class="nav-item">Pricing</a>
                 <a href="investors.html">
                     <div class="nav-item">
                         Contact
@@ -829,7 +865,7 @@
                 Resources
                 <span class="dropdown-arrow"></span>
             </a>
-            <a href="enterprice.html" class="mobile-menu-item">Enterprise</a>
+            <a href="404.html" class="mobile-menu-item">Enterprise</a>
             <a href="pricing.html" class="mobile-menu-item">Pricing</a>
             <a href="investors.html" class="mobile-menu-item">
                 Contact / Invest
@@ -938,7 +974,7 @@
             if (loadingOverlay) {
                 setTimeout(() => {
                     loadingOverlay.classList.add('hidden');
-                }, 800);
+                }, 600);
             }
 
             // Banner close functionality
@@ -958,9 +994,11 @@
 
             if (hamburgerMenu && mobileMenu && mobileMenuClose) {
                 hamburgerMenu.addEventListener('click', function() {
-                    mobileMenu.classList.add('active');
-                    hamburgerMenu.classList.add('active');
-                    document.body.style.overflow = 'hidden';
+                    requestAnimationFrame(() => {
+                        mobileMenu.classList.add('active');
+                        hamburgerMenu.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
                 });
 
                 mobileMenuClose.addEventListener('click', function() {
