@@ -304,6 +304,9 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             transition: transform 0.5s, box-shadow 0.5s;
             position: relative;
+            max-width: 600px; /* Maximale Breite hinzugefügt */
+            width: 100%; /* Volle verfügbare Breite */
+            margin: 0 auto; /* Zentrieren */
         }
 
         .use-case-image img {
@@ -311,6 +314,8 @@
             height: auto;
             display: block;
             transition: transform 0.5s;
+            max-width: 100%; /* Verhindert Überlaufen */
+            object-fit: cover; /* Behält Seitenverhältnis bei */
         }
 
         .use-case-image::before {
@@ -455,7 +460,8 @@
         }
 
         .mobile-menu {
-            display: none;
+            display: flex;  /* Ändern von 'none' zu 'flex' */
+            flex-direction: column;
             position: fixed;
             top: 0;
             left: 0;
@@ -464,75 +470,38 @@
             background-color: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            padding: 20px;
+            padding: 40px 20px;
             z-index: 1000;
             overflow-y: auto;
-            transition: opacity 0.3s, transform 0.3s;
             opacity: 0;
-            transform: translateY(-20px);
+            visibility: hidden;
+            transform: translateX(100%);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);  /* von 0.6s auf 0.8s erhöht */
         }
 
         .mobile-menu.active {
-            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .mobile-menu-items {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;  /* von 0.5s auf 0.6s erhöht */
+            transition-delay: 0.4s;  /* von 0.3s auf 0.4s erhöht */
+        }
+
+        .mobile-menu.active .mobile-menu-items {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .mobile-menu-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 32px;
-        }
-
-        .mobile-menu-close {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: 24px;
-            cursor: pointer;
-            transition: color 0.2s, transform 0.2s;
-        }
-
-        .mobile-menu-close:hover {
-            color: var(--primary-color);
-            transform: rotate(90deg);
-        }
-
-        .mobile-menu-items {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .mobile-menu-item {
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 18px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-            transition: color 0.2s, padding-left 0.3s;
-        }
-
-        .mobile-menu-item:hover {
-            color: var(--primary-color);
-            padding-left: 8px;
-        }
-
-        .mobile-menu .signup-btn {
-            margin-top: 24px;
-            width: 100%;
-            text-align: center;
-        }
-
-        /* Footer */
+        /* Footer Styles */
         footer {
             background-color: rgba(0, 0, 0, 0.5);
             padding: 80px 0 40px;
-            margin-top: 80px;
+            margin-top: 120px;
             border-top: 1px solid var(--border-color);
         }
 
@@ -615,76 +584,6 @@
             color: var(--text-secondary);
         }
 
-        /* Back to top button */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: var(--primary-color);
-            color: black;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0, 242, 255, 0.3);
-            z-index: 99;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            background-color: var(--hover-color);
-            transform: translateY(-5px);
-        }
-
-
-        .mobile-menu {
-    display: flex;  /* Ändern von 'none' zu 'flex' */
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 40px 20px;
-    z-index: 1000;
-    overflow-y: auto;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateX(100%);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);  /* von 0.6s auf 0.8s erhöht */
-}
-
-.mobile-menu.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(0);
-}
-
-.mobile-menu-items {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease;  /* von 0.5s auf 0.6s erhöht */
-    transition-delay: 0.4s;  /* von 0.3s auf 0.4s erhöht */
-}
-
-.mobile-menu.active .mobile-menu-items {
-    opacity: 1;
-    transform: translateY(0);
-}
-
         /* Responsive Styles */
         @media (max-width: 1024px) {
             .page-header h1 {
@@ -730,6 +629,13 @@
             .use-case-image {
                 order: 1;
                 margin-bottom: 20px;
+                max-width: 100%; /* Volle Breite auf mobilen Geräten */
+            }
+            
+            .use-case img {
+                width: 100%;
+                height: auto;
+                max-width: 100%;
             }
 
             .use-case h2 {
@@ -884,7 +790,8 @@
                     </div>
                     <a href="explore.html" class="cta-btn">Explore Engineering Solutions</a>
                 </div>
-                <img src="engineering-setup.jpg"  alt="Engineering and Design with HoloCraft">
+                <div class="use-case-image">
+                    <img src="engineering-setup.jpg" alt="Engineering and Design with HoloCraft">
                 </div>
             </div>
 
@@ -1137,3 +1044,4 @@
     </script>
 </body>
 </html>
+``` 
