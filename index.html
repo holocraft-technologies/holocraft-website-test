@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -138,9 +136,12 @@
         }
 
         .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 30px;
         }
 
         .logo {
@@ -148,8 +149,8 @@
             font-size: var(--font-size-xxl);
             font-weight: 700;
             text-decoration: none;
+            margin-right: 40px; /* Mehr Abstand nach rechts */
             transition: transform var(--transition-medium), text-shadow var(--transition-medium);
-            letter-spacing: -0.5px;
         }
 
         .logo:hover {
@@ -159,8 +160,9 @@
 
         .nav-links {
             display: flex;
-            gap: var(--spacing-xl);
+            gap: 32px; /* Größerer Abstand zwischen Links */
             align-items: center;
+            margin-right: auto; /* Pushed nav-actions nach rechts */
         }
 
         .nav-item {
@@ -214,7 +216,8 @@
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: var(--spacing-lg);
+            gap: 24px;
+            margin-left: 40px; /* Mehr Abstand von den nav-links */
         }
 
         .search-container {
@@ -228,7 +231,8 @@
             color: var(--text-color);
             border-radius: var(--radius-full);
             font-size: var(--font-size-sm);
-            width: 180px;
+            width: 200px; /* Fixe Breite */
+            margin-right: 10px;
             transition: background-color var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
         }
 
@@ -260,6 +264,7 @@
             padding: var(--spacing-sm) var(--spacing-md);
             border-radius: var(--radius-md);
             font-weight: 500;
+            
         }
 
         .login-btn:hover {
@@ -285,6 +290,33 @@
             background-color: var(--hover-color);
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(0, 242, 255, 0.3);
+        }
+
+        /* Mobile Anpassungen */
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 20px;
+            }
+
+            .logo {
+                font-size: var(--font-size-xl);
+                margin-right: 0;
+            }
+
+            .hamburger-menu {
+                margin-left: auto; /* Pushed hamburger nach rechts */
+                padding: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: var(--font-size-lg);
+            }
         }
 
         /* Hero Sections */
@@ -794,7 +826,7 @@
             }
 
             .cta-btn {
-                padding: var(--spacing-md) var(--spacing-lg);
+                padding: 8px 12px;
                 font-size: var(--font-size-md);
             }
 
