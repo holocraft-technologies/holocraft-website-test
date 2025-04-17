@@ -1,17 +1,53 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HoloCraft Technologies - Interactive Holographic Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #00f2ff;
+            --primary-light: rgba(0, 242, 255, 0.1);
+            --primary-dark: #00c4cc;
             --background-color: #000000;
+            --background-gradient: linear-gradient(130deg, rgb(1, 11, 14) 0%, rgb(0, 0, 0) 100%);
+            --surface-color: rgba(255, 255, 255, 0.05);
             --text-color: #ffffff;
             --text-secondary: rgba(215, 215, 215, 0.833);
-            --border-color: rgba(252, 252, 252, 0.314);
+            --text-tertiary: rgba(255, 255, 255, 0.5);
+            --border-color: rgba(252, 252, 252, 0.1);
             --hover-color: #8dfcf7;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --shadow-color: rgba(0, 242, 255, 0.2);
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+            --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-xxl: 48px;
+            --spacing-xxxl: 64px;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --font-size-xs: 12px;
+            --font-size-sm: 14px;
+            --font-size-md: 16px;
+            --font-size-lg: 18px;
+            --font-size-xl: 20px;
+            --font-size-xxl: 24px;
+            --font-size-xxxl: 32px;
+            --font-size-display: 48px;
+            --font-size-hero: 64px;
         }
 
         * {
@@ -21,32 +57,41 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background: linear-gradient(130deg, rgb(1, 11, 14) 0%, rgb(0, 0, 0) 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--background-gradient);
             color: var(--text-color);
-            line-height: 1.5;
+            line-height: 1.6;
             overflow-x: hidden;
+            font-weight: 400;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
         }
 
         /* Banner Styles */
         .banner {
             background-color: var(--primary-color);
             color: black;
-            padding: 10px 20px;
+            padding: var(--spacing-sm) var(--spacing-md);
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
-            font-size: 14px;
+            font-size: var(--font-size-sm);
             text-align: center;
+            font-weight: 500;
         }
 
         .banner-link {
             color: black;
             font-weight: 600;
             text-decoration: underline;
-            margin-left: 4px;
-            transition: opacity 0.2s;
+            margin-left: var(--spacing-xs);
+            transition: opacity var(--transition-fast);
         }
 
         .banner-link:hover {
@@ -55,13 +100,18 @@
 
         .banner-close {
             position: absolute;
-            right: 20px;
+            right: var(--spacing-md);
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: var(--font-size-xxl);
             cursor: pointer;
             color: black;
-            transition: transform 0.2s;
+            transition: transform var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
         }
 
         .banner-close:hover {
@@ -71,36 +121,35 @@
         /* Navigation Styles */
         nav {
             border-bottom: 1px solid var(--border-color);
-            padding: 16px 0;
+            padding: var(--spacing-md) 0;
             position: sticky;
             top: 0;
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(0, 0, 0, 0.8);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 100;
-            transition: all 0.3s ease;
+            transition: all var(--transition-medium);
         }
 
         nav.scrolled {
-            padding: 12px 0;
+            padding: var(--spacing-sm) 0;
             box-shadow: 0 2px 10px rgba(0, 242, 255, 0.1);
+            background-color: rgba(0, 0, 0, 0.95);
         }
 
         .nav-container {
-            max-width: 1400px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 20px;
         }
 
         .logo {
             color: var(--primary-color);
-            font-size: 24px;
-            font-weight: bold;
+            font-size: var(--font-size-xxl);
+            font-weight: 700;
             text-decoration: none;
-            transition: transform 0.3s, text-shadow 0.3s;
+            transition: transform var(--transition-medium), text-shadow var(--transition-medium);
+            letter-spacing: -0.5px;
         }
 
         .logo:hover {
@@ -110,7 +159,7 @@
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: var(--spacing-xl);
             align-items: center;
         }
 
@@ -119,11 +168,13 @@
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 4px;
-            font-size: 14px;
+            gap: var(--spacing-xs);
+            font-size: var(--font-size-sm);
             cursor: pointer;
-            transition: color 0.2s, transform 0.2s;
+            transition: color var(--transition-fast), transform var(--transition-fast);
             position: relative;
+            font-weight: 500;
+            padding: var(--spacing-sm) var(--spacing-xs);
         }
 
         .nav-item:hover {
@@ -134,12 +185,12 @@
         .nav-item::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -2px;
             left: 0;
             width: 0;
             height: 2px;
             background-color: var(--primary-color);
-            transition: width 0.3s;
+            transition: width var(--transition-medium);
         }
 
         .nav-item:hover::after {
@@ -153,7 +204,7 @@
             border-bottom: 2px solid currentColor;
             transform: rotate(-45deg);
             margin-top: -4px;
-            transition: transform 0.2s;
+            transition: transform var(--transition-fast);
         }
 
         .nav-item:hover .dropdown-arrow {
@@ -163,7 +214,7 @@
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 24px;
+            gap: var(--spacing-lg);
         }
 
         .search-container {
@@ -171,60 +222,62 @@
         }
 
         .search-input {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: none;
-            padding: 10px 36px 10px 16px;
+            background-color: var(--surface-color);
+            border: 1.5px solid var(--border-color);
+            padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-sm) var(--spacing-md);
             color: var(--text-color);
-            border-radius: 6px;
-            font-size: 14px;
-            width: 240px;
-            transition: background-color 0.2s, box-shadow 0.2s;
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            width: 180px;
+            transition: background-color var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
         }
 
         .search-input:focus {
             outline: none;
-            background-color: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 0 2px rgba(0, 242, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 2px rgba(0, 242, 255, 0.2);
+            border-color: var(--primary-color);
         }
 
         .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--text-tertiary);
         }
 
         .search-icon {
             position: absolute;
-            right: 12px;
+            right: var(--spacing-sm);
             top: 50%;
             transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.5);
+            color: var(--text-tertiary);
             pointer-events: none;
         }
 
         .login-btn {
             color: var(--text-color);
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s, transform 0.2s;
-            padding: 8px 12px;
-            border-radius: 4px;
+            font-size: var(--font-size-sm);
+            transition: color var(--transition-fast), transform var(--transition-fast), background-color var(--transition-fast);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            font-weight: 500;
         }
 
         .login-btn:hover {
             color: var(--primary-color);
             transform: translateY(-2px);
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: var(--surface-color);
         }
 
         .signup-btn {
             background-color: var(--primary-color);
             color: black;
-            padding: 8px 16px;
-            border-radius: 6px;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
             text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0, 242, 255, 0.2);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            transition: all var(--transition-medium);
+            box-shadow: 0 4px 12px var(--shadow-color);
             display: inline-block;
         }
 
@@ -237,9 +290,9 @@
         /* Hero Sections */
         .hero {
             max-width: 1200px;
-            margin: 100px auto;
+            margin: var(--spacing-xxxl) auto;
             text-align: center;
-            padding: 0 20px;
+            padding: 0 var(--spacing-md);
             animation: fadeIn 1s ease-out;
         }
 
@@ -249,37 +302,37 @@
         }
 
         .hero h1 {
-            font-size: 64px;
+            font-size: clamp(var(--font-size-xxxl), 5vw, var(--font-size-hero));
             font-weight: 700;
-            margin-bottom: 24px;
+            margin-bottom: var(--spacing-lg);
             line-height: 1.1;
-            text-shadow: 0 4px 32px rgba(255, 255, 255, 0.5518);
-            background: white;
-            color: #ffffff;
+            background: linear-gradient(to right, var(--text-color), var(--primary-color));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            letter-spacing: -1px;
         }
 
         .hero-subtitle {
-            font-size: 20px;
+            font-size: clamp(var(--font-size-md), 2vw, var(--font-size-xl));
             color: var(--text-secondary);
             max-width: 600px;
-            margin: 0 auto 40px;
+            margin: 0 auto var(--spacing-xxl);
+            font-weight: 400;
         }
 
         .cta-btn {
             background-color: var(--primary-color);
             color: black;
-            padding: 14px 28px;
-            border-radius: 8px;
+            padding: 8px 14px;
+            border-radius: var(--radius-md);
             text-decoration: none;
             font-weight: 600;
-            font-size: 16px;
+            font-size: var(--font-size-md);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
+            gap: var(--spacing-sm);
+            transition: all var(--transition-medium);
             box-shadow: 0 4px 32px rgba(147, 249, 252, 0.25);
             position: relative;
             overflow: hidden;
@@ -298,7 +351,7 @@
         }
 
         .cta-btn:hover {
-            background-color: #ffffff;
+            background-color: var(--hover-color);
             transform: translateY(-5px);
             box-shadow: 0 8px 32px rgba(147, 249, 252, 0.4);
         }
@@ -309,7 +362,8 @@
 
         .cta-btn::after {
             content: "→";
-            transition: transform 0.3s;
+            transition: transform var(--transition-medium);
+            margin-left: var(--spacing-xs);
         }
 
         .cta-btn:hover::after {
@@ -317,34 +371,88 @@
         }
 
         .no-download {
-            margin-top: 16px;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 14px;
+            margin-top: var(--spacing-md);
+            color: var(--text-tertiary);
+            font-size: var(--font-size-sm);
+        }
+
+        /* Feature Cards */
+        .features {
+            padding: var(--spacing-xxxl) 0;
+            background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.03));
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xxl);
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-xl);
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.1);
+            border-color: rgba(0, 242, 255, 0.2);
+        }
+
+        .feature-icon {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .feature-title {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            font-size: var(--font-size-md);
+            line-height: 1.6;
         }
 
         /* Video Section */
         .video-container {
             position: relative;
             max-width: 1200px;
-            margin: 80px auto;
-            border-radius: 16px;
+            margin: var(--spacing-xxl) auto;
+            border-radius: var(--radius-lg);
             overflow: hidden;
             background: none;
-            padding: 0 20px;
+            padding: 0 var(--spacing-md);
             z-index: 2;
-           
         }
 
         .video-container img {
             box-shadow: 0 0 40px rgba(0, 242, 255, 0.15);
-            border-radius: 16px;
-            transition: transform 0.5s, box-shadow 0.5s;
+            border-radius: var(--radius-lg);
+            transition: transform var(--transition-slow), box-shadow var(--transition-slow);
             display: block;
             margin: 0 auto;
             max-width: 70%;
             height: auto;
-            margin-top: 30px;
-            margin-bottom: 30px;
+            margin-top: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
         }
 
         .video-container:hover img {
@@ -357,17 +465,16 @@
             height: auto;
             display: block;
             margin: 0 auto;
-            border-radius: 16px;
+            border-radius: var(--radius-lg);
         }
 
         .hero img {
             max-width: 70%;
-            border-radius: 16px;
+            border-radius: var(--radius-lg);
             box-shadow: 0 0 40px rgba(0, 242, 255, 0.15);
-            transition: transform 0.5s, box-shadow 0.5s;
-            margin: 40px auto 0;
+            transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+            margin: var(--spacing-xxl) auto 0;
             display: block;
-           
         }
 
         .hero img:hover {
@@ -375,57 +482,50 @@
             box-shadow: 0 0 60px rgba(0, 242, 255, 0.25);
         }
 
-        /* Features Section */
-        .features {
-            padding: 120px 0;
-            background: linear-gradient(to bottom, transparent, rgba(0, 255, 179, 0.05));
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .features h2 {
-            font-size: 48px;
+        /* Section Titles */
+        .section-title {
+            font-size: clamp(var(--font-size-xxl), 4vw, var(--font-size-display));
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: var(--spacing-lg);
+            background: linear-gradient(to right, var(--text-color), var(--primary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            letter-spacing: -1px;
         }
 
-        .features-subtitle {
+        .section-subtitle {
             text-align: center;
             color: var(--text-secondary);
-            font-size: 20px;
+            font-size: var(--font-size-lg);
             max-width: 600px;
-            margin: 0 auto 60px;
+            margin: 0 auto var(--spacing-xxl);
         }
 
         /* Footer */
         footer {
             background-color: rgba(0, 0, 0, 0.5);
-            padding: 80px 0 40px;
-            margin-top: 120px;
+            padding: var(--spacing-xxxl) 0 var(--spacing-xxl);
+            margin-top: var(--spacing-xxxl);
             border-top: 1px solid var(--border-color);
         }
 
         .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
+            gap: var(--spacing-xxl);
         }
 
         .footer-logo {
             color: var(--primary-color);
-            font-size: 24px;
-            font-weight: bold;
+            font-size: var(--font-size-xxl);
+            font-weight: 700;
             text-decoration: none;
-            margin-bottom: 24px;
+            margin-bottom: var(--spacing-lg);
             display: block;
-            transition: text-shadow 0.3s;
+            transition: text-shadow var(--transition-medium);
+            letter-spacing: -0.5px;
         }
 
         .footer-logo:hover {
@@ -434,44 +534,46 @@
 
         .social-links {
             display: flex;
-            gap: 16px;
-            margin-top: 24px;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
             flex-wrap: wrap;
         }
 
         .social-link {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s, transform 0.2s;
-            padding: 8px 12px;
-            border-radius: 4px;
+            font-size: var(--font-size-sm);
+            transition: color var(--transition-fast), transform var(--transition-fast), background-color var(--transition-fast);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
         }
 
         .social-link:hover {
             color: var(--primary-color);
             transform: translateY(-2px);
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: var(--surface-color);
         }
 
         .footer-column h3 {
-            font-size: 16px;
-            margin-bottom: 16px;
+            font-size: var(--font-size-md);
+            margin-bottom: var(--spacing-md);
             color: var(--text-color);
+            font-weight: 600;
         }
 
         .footer-links {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: var(--spacing-sm);
         }
 
         .footer-link {
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s, transform 0.2s;
+            font-size: var(--font-size-sm);
+            transition: color var(--transition-fast), transform var(--transition-fast);
             display: inline-block;
+            padding: var(--spacing-xs) 0;
         }
 
         .footer-link:hover {
@@ -485,7 +587,7 @@
             flex-direction: column;
             gap: 6px;
             cursor: pointer;
-            padding: 8px;
+            padding: var(--spacing-sm);
             z-index: 101;
         }
 
@@ -494,7 +596,7 @@
             width: 24px;
             height: 2px;
             background-color: var(--text-color);
-            transition: 0.3s;
+            transition: var(--transition-medium);
         }
 
         .hamburger-menu.active span:nth-child(1) {
@@ -520,21 +622,21 @@
             background-color: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            padding: 40px 20px;
+            padding: var(--spacing-xxl) var(--spacing-md);
             z-index: 1000;
             overflow-y: auto;
             opacity: 0;
             visibility: hidden;
             transform: translateX(100%);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all var(--transition-slow);
         }
 
         .mobile-menu-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
-            padding-bottom: 20px;
+            margin-bottom: var(--spacing-xxl);
+            padding-bottom: var(--spacing-md);
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -542,10 +644,10 @@
             background: none;
             border: none;
             color: var(--text-color);
-            font-size: 32px;
+            font-size: var(--font-size-xxxl);
             cursor: pointer;
-            padding: 8px;
-            transition: transform 0.3s;
+            padding: var(--spacing-sm);
+            transition: transform var(--transition-medium), color var(--transition-medium);
         }
 
         .mobile-menu-close:hover {
@@ -556,23 +658,23 @@
         .mobile-menu-items {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: var(--spacing-lg);
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.5s ease;
+            transition: all var(--transition-slow);
             transition-delay: 0.3s;
         }
 
         .mobile-menu-item {
             color: var(--text-color);
             text-decoration: none;
-            font-size: 18px;
-            padding: 12px 0;
+            font-size: var(--font-size-lg);
+            padding: var(--spacing-md) 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: color 0.3s, transform 0.3s;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: color var(--transition-medium), transform var(--transition-medium);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .mobile-menu-item:hover {
@@ -586,7 +688,7 @@
             border-left: 2px solid currentColor;
             border-bottom: 2px solid currentColor;
             transform: rotate(-45deg);
-            transition: transform 0.3s;
+            transition: transform var(--transition-medium);
         }
 
         .mobile-menu-item:hover .dropdown-arrow {
@@ -594,24 +696,17 @@
         }
 
         .mobile-menu .signup-btn {
-            margin-top: 32px;
+            margin-top: var(--spacing-xl);
             width: 100%;
             text-align: center;
-            padding: 16px;
-            font-size: 16px;
+            padding: var(--spacing-md);
+            font-size: var(--font-size-md);
         }
 
         .mobile-menu.active {
             opacity: 1;
             visibility: visible;
             transform: translateX(0);
-        }
-
-        .mobile-menu-items {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.3s ease;
-            transition-delay: 0.2s;
         }
 
         .mobile-menu.active .mobile-menu-items {
@@ -635,7 +730,7 @@
             cursor: pointer;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s;
+            transition: all var(--transition-medium);
             box-shadow: 0 4px 12px rgba(0, 242, 255, 0.3);
             z-index: 99;
         }
@@ -652,17 +747,13 @@
 
         /* Responsive Styles */
         @media (max-width: 1024px) {
-            .hero h1 {
-                font-size: 48px;
-                width: 100%;
+            :root {
+                --font-size-hero: 48px;
+                --font-size-display: 36px;
             }
 
-            .hero-subtitle {
-                font-size: 18px;
-            }
-
-            .features h2 {
-                font-size: 36px;
+            .hero {
+                margin: var(--spacing-xxl) auto;
             }
         }
 
@@ -676,23 +767,22 @@
             }
 
             .hero {
-                margin: 60px auto;
+                margin: var(--spacing-xl) auto;
             }
 
             .hero h1 {
-                font-size: 36px;
-                width: 100%;
-                padding: 0 10px;  /* Added padding */
-                max-width: 90vw;  /* Added max-width */
-                margin: 0 auto;   /* Center the text */
+                padding: 0 var(--spacing-sm);
+                max-width: 90vw;
+                margin: 0 auto var(--spacing-md);
             }
 
             .hero-subtitle {
-                font-size: 16px;
+                font-size: var(--font-size-md);
+                padding: 0 var(--spacing-sm);
             }
 
             .video-container {
-                margin: 40px auto;
+                margin: var(--spacing-xxl) auto;
             }
 
             .video-container img {
@@ -704,8 +794,8 @@
             }
 
             .cta-btn {
-                padding: 12px 24px;
-                font-size: 15px;
+                padding: var(--spacing-md) var(--spacing-lg);
+                font-size: var(--font-size-md);
             }
 
             .footer-container {
@@ -714,15 +804,19 @@
         }
 
         @media (max-width: 480px) {
+            :root {
+                --spacing-xxxl: 48px;
+                --spacing-xxl: 32px;
+            }
+
             .hero h1 {
-                font-size: 32px;
-                width: 100%;
-                padding: 0 5px;   /* Smaller padding for very small devices */
-                max-width: 95vw;  /* Wider on very small devices */
+                padding: 0 var(--spacing-xs);
+                max-width: 95vw;
             }
 
             .hero-subtitle {
-                font-size: 15px;
+                font-size: var(--font-size-sm);
+                padding: 0 var(--spacing-xs);
             }
 
             .video-container img {
@@ -791,6 +885,39 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* Glow effects */
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+
+        .glow-box {
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+
+        /* Hover card effect */
+        .hover-card {
+            transition: transform var(242,255,0.2);
+        }
+
+        /* Hover card effect */
+        .hover-card {
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+        }
+
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.15);
+        }
+
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--radius-md);
+        }
     </style>
 </head>
 <body>
@@ -842,8 +969,8 @@
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
                 </div>
-                <a href="emailsub.html#" class="login-btn">Email Newsletter</a>
-                <a href="investors.html#" class="signup-btn">Investments</a>
+                <a href="emailsub.html" class="login-btn">Email Newsletter</a>
+                <a href="investors.html" class="signup-btn">Investments</a>
             </div>
             <div class="hamburger-menu">
                 <span></span>
@@ -871,7 +998,7 @@
                 Resources
                 <span class="dropdown-arrow"></span>
             </a>
-            <a href="404.html" class="mobile-menu-item">Enterprise</a>
+            <a href="enterprise.html" class="mobile-menu-item">Enterprise</a>
             <a href="pricing.html" class="mobile-menu-item">Pricing</a>
             <a href="investors.html" class="mobile-menu-item">
                 Contact / Invest
@@ -886,7 +1013,7 @@
         <section class="hero fade-in">
             <h1>HoloCraft Technologies<br>New Era of Visualizing</h1>
             <p class="hero-subtitle">Experience the Future of Holographic Interaction!</p>
-            <a href="#herofirst" class="cta-btn">Learn More About</a>
+            <a href="#herofirst" class="cta-btn">Learn More</a>
             <p class="no-download">Upcoming 2025</p>
         </section>
 
@@ -900,17 +1027,61 @@
             <img src="cold, smooth & tasty. (3).png" alt="HoloCraft Interactive 3D Visualization" class="heroimg1">
         </section>
 
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Revolutionary Technology</h2>
+                <p class="section-subtitle">Our holographic fan with camera technology transforms how businesses visualize and interact with 3D models</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card hover-card">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">HDMI Connectivity</h3>
+                        <p class="feature-description">Simply connect via HDMI to your computer and start visualizing your 3D models instantly.</p>
+                    </div>
+                    
+                    <div class="feature-card hover-card">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83M16.62 12l-5.74 9.94"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">CAD Software Compatible</h3>
+                        <p class="feature-description">Works with all major CAD software including Blender, Fusion 360, and more.</p>
+                    </div>
+                    
+                    <div class="feature-card hover-card">
+                        <div class="feature-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M5 3v4M3 5h4M6 17v4M4 19h4M13 3l4 4M17 5l-4 4M13 20l4-4M17 16l-4 4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Hand Tracking</h3>
+                        <p class="feature-description">Intuitive gesture controls let you rotate, zoom, and manipulate 3D objects with natural hand movements.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="hero slide-up">
             <h1>Gesture-Controlled Holograms</h1>
             <p class="hero-subtitle">
                 HoloCraft is dedicated to the seamless integration of digital elements within the physical world, enabling highly interactive and immersive experiences at the intersection of reality and virtual content.</p>
-            <img src="672 LEDs Achses (1).png" alt="HoloCraft LED Hologram Display" class="heroimg2">
+            <img src="672 LEDs Achses (1).png" alt="HoloCraft LED Hologram Display" class="heroimg2 glow-box">
         </section>
 
         <footer>
-            <div class="footer-container">
+            <div class="container footer-container">
                 <div class="footer-column">
                     <a href="index.html" class="footer-logo">HoloCraft</a>
+                    <p class="footer-description" style="color: var(--text-secondary); margin-bottom: var(--spacing-md); font-size: var(--font-size-sm);">
+                        Revolutionizing 3D visualization with holographic technology for businesses.
+                    </p>
                     <div class="social-links">
                         <a href="404.html" class="social-link">Join our Vision</a>
                         <a href="404.html" class="social-link">Youtube</a>
@@ -1104,4 +1275,3 @@
     </script>
 </body>
 </html>
-`
